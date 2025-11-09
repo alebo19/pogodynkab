@@ -1,0 +1,29 @@
+App\Entity\Location:
+    properties:
+        city:
+            - NotBlank: { groups: [new, edit] }
+            - Length: { min: 2, max: 100, groups: [new, edit] }
+        country:
+            - NotBlank: { groups: [new, edit] }
+        latitude:
+            - NotBlank: { groups: [new, edit] }
+            - Range: { min: -90, max: 90, groups: [new, edit] }
+        longitude:
+            - NotBlank: { groups: [new, edit] }
+            - Range: { min: -180, max: 180, groups: [new, edit] }
+
+App\Entity\Measurement:
+    properties:
+        celsius:
+            - NotBlank: { groups: [new, edit] }
+            - Type:
+                  type: numeric
+                  message: 'Wartość musi być liczbą.'
+                  groups: [new, edit]
+            - Range:
+                  min: -80
+                  max: 60
+                  notInRangeMessage: 'Temperatura musi być pomiędzy -80 a 60 °C.'
+                  groups: [new, edit]
+        location:
+            - NotNull: { groups: [new, edit] }
